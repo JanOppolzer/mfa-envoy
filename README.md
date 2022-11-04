@@ -72,7 +72,7 @@ Then get a TLS certificate. If you would like to avoid paying to a Certificate A
 </VirtualHost>
 ```
 
-It is also highly recommended to allow `web` user (the user defined in `config` file in the `TARGET_USER` variable, i.e. the one under which Číselník application is saved in `/home` directory) to reload and restart PHP-FPM. It helps with minimizing outage during deployment of a new version. Edit `/etc/sudoers.d/web` accordingly:
+It is also highly recommended to allow `web` user (the user defined in `config` file in the `TARGET_USER` variable, i.e. the one under which MFA application is saved in `/home` directory) to reload and restart PHP-FPM. It helps with minimizing outage during deployment of a new version. Edit `/etc/sudoers.d/web` accordingly:
 
 ```
 web ALL=(ALL) NOPASSWD:/bin/systemctl reload php8.1-fpm,/bin/systemctl restart php8.1-fpm
@@ -105,8 +105,6 @@ apt install libapache2-mod-shib
 ```
 
 There is a [documentation](https://www.eduid.cz/cs/tech/sp/shibboleth) (in Czech language, though) available at [eduID.cz](https://www.eduid.cz/cs/tech/sp/shibboleth) federation web page.
-
-You should add _AttributeChecker_ (Číselník requires _uniqueId_, _mail_ and _cn_ attributes) and _AttributeExtractor_ (to obtain useful information from federation metadata).
 
 ```xml
 <ApplicationDefaults entityID="https://server.example.org/shibboleth"
@@ -161,7 +159,7 @@ There are three different tasks available — `deploy`, `rollback` and `cleanup`
 
 ### deploy
 
-The `deploy` task simply deploys the current Číselník version available at GitHub into timestamped directory and makes a symbolic link `current`. This helps you with rolling back to the previous version.
+The `deploy` task simply deploys the current MFA version available at GitHub into timestamped directory and makes a symbolic link `current`. This helps you with rolling back to the previous version.
 
 ```bash
 envoy run deploy
