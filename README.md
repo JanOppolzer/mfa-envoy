@@ -104,11 +104,11 @@ Install and configure Shibboleth SP.
 apt install libapache2-mod-shib
 ```
 
-There is a [documentation](https://www.eduid.cz/cs/tech/sp/shibboleth) (in Czech language, though) available at [eduID.cz](https://www.eduid.cz/cs/tech/sp/shibboleth) federation web page.
+There is a [documentation](https://www.eduid.cz/cs/tech/sp/shibboleth) (in Czech language, though) available at [eduID.cz](https://www.eduid.cz/cs/tech/sp/shibboleth) federation web page. However, since this service does not need to process any personal information and only checks for `https://refeds.org/profile/mfa` in AuthnContext Class, `REMOTE_USER` can be safely left empty and there is no need to define any attributes in `attribute-map.xml` configuration file.
 
 ```xml
 <ApplicationDefaults entityID="https://server.example.org/shibboleth"
-    REMOTE_USER="persistent-id"
+    REMOTE_USER=""
     cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
 
     <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
@@ -121,7 +121,7 @@ There is a [documentation](https://www.eduid.cz/cs/tech/sp/shibboleth) (in Czech
         helpLocation="/about.html"
         styleSheet="/shibboleth-sp/main.css"
         redirectErrors="/error"/>
-    
+
 </ApplicationDefaults>
 ```
 
